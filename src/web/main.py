@@ -1,13 +1,15 @@
-from flask import Flask, jsonify
-from flask_restful import Api, Resource
-from config import DevelopmentConfig, ProductionConfig
+from flask import Flask
+
+from config import DevelopmentConfig
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig())
 
+
 @app.route('/')
 def index():
     return "Report Automation Backend services - version 0.1 20200922"
+
 
 @app.route('/get/<field>')
 def field_query(field):
@@ -20,8 +22,9 @@ def field_query(field):
     except:
         return 'field exception'
 
+
 @app.route('/queryby/<field>/<value>/<target_field>')
-def query_by(field,value,target_field):
+def query_by(field, value, target_field):
     import pandas as pd
     from flask import jsonify
     try:
@@ -32,9 +35,6 @@ def query_by(field,value,target_field):
         return "exception"
 
 
-
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app.run()
-
