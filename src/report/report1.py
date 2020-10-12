@@ -1,15 +1,12 @@
-from pptx import Presentation
-from pptx.enum.dml import MSO_LINE_DASH_STYLE
-from pptx.util import Inches, Pt
+import pandas as pd
+from pandas import np
 from pptx import Presentation
 from pptx.chart.data import ChartData, CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
-from pptx.util import Cm  # Inches
-from pandas import np
 from pptx.enum.chart import XL_LEGEND_POSITION
-
-from pptx.dml.color import RGBColor
-import pandas as pd
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
+from pptx.util import Cm  # Inches
+from pptx.util import Pt
 
 if __name__ == '__main__':
     # open ppt with cover
@@ -31,7 +28,7 @@ if __name__ == '__main__':
     end_year = start_year + year_span
     # oem = ['FAW-VW', 'JAC-VW', 'JV TBD', 'SAIC-VW']
     # brand = ['Audi', 'Cupra', 'Jetta', 'Sihao', 'Skoda', 'VW']
-    #根据所有filter过滤大众数据
+    # 根据所有filter过滤大众数据
     df_vw_filter = df_vw[
         (df_vw['PR_Status'] == 'PR67.OP') & (df_vw['YEAR'] >= start_year) & (df_vw['YEAR'] <= end_year) & (
             df_vw['OEM'].isin(oem)) & (df_vw['Brand'].isin(brand))]
@@ -189,7 +186,6 @@ if __name__ == '__main__':
 
     # 设置行头
 
-
     # 填充表格数据
     for row_idx, fuel_group in enumerate(data_fuel_group):
         series_Volumes = df_vw_group_fuel_year[(df_vw_group_fuel_year['Fuel_Type_Group'] == fuel_group)] \
@@ -204,21 +200,23 @@ if __name__ == '__main__':
         print(fuel_group_mkt_rate)
         table.cell(row_idx + 1, 0).text = fuel_group + ' MKT%'
         for col_idx, rate in enumerate(fuel_group_mkt_rate):
-            table.cell(row_idx + 1, col_idx + 1).text = format(rate, '.1%')#str(rate)
-            #table.cell(row_idx + 1, col_idx + 1).text_frame.paragraphs[0].number_format = '0.0%'
+            table.cell(row_idx + 1, col_idx + 1).text = format(rate, '.1%')  # str(rate)
+            # table.cell(row_idx + 1, col_idx + 1).text_frame.paragraphs[0].number_format = '0.0%'
 
-    #调整table每个cell的字体
+
+    # 调整table每个cell的字体
     def iter_cells(table):
         for row in table.rows:
             for cell in row.cells:
                 yield cell
+
 
     for cell in iter_cells(table):
         for paragraph in cell.text_frame.paragraphs:
             for run in paragraph.runs:
                 run.font.size = Pt(10)
 
-    #开始添加注释文本框
+    # 开始添加注释文本框
     left = Cm(1)  # left，top为相对位置
     top = Cm(4)
     width = Cm(2)  # width，height为文本框的大小

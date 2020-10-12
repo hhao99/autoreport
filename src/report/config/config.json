@@ -1,0 +1,238 @@
+{
+  "reports": [
+    {
+      "name": "Report 0",
+      "is_visible": 1,
+      "pr_round": {
+        "name": "PR Round",
+        "values": ["PR67.SP","PR67.OP"],
+        "selected": []
+      },
+      "year_range": {
+        "name": "Year Range",
+        "values": [2010,2030],
+        "selected": []
+      },
+      "filters": [
+        {
+          "name": "Oem",
+          "type": "select",
+          "values": ["FAW-VW","SAIC-VW","Audi"],
+          "selected": []
+        },
+        {
+          "name": "Brand",
+          "values": ["VW","Audi","Jetta"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "FuelType",
+          "values": ["ICE","BEV","PHEV"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "BuildType",
+          "values": ["CKD","FBU"],
+          "type": "select",
+          "selected": []
+        }
+      ],
+      "group_by": {
+        "name": "Group By",
+        "values": ["Oem","Brand"],
+        "selected": []
+      },
+      "compute_methods": {
+        "divisor": {
+          "name": "Divior",
+          "values": [""],
+          "selected": []
+        },
+        "divided_by": {
+          "name": "Divided By",
+          "values": ["Total","ICE","BEV","PHEV"],
+          "selected": []
+        }
+      }
+    },
+    {
+      "name": "Report 1",
+      "is_visible": 1,
+      "pr_round": {
+        "name": "PR Round",
+        "values": ["PR67.SP","PR67.OP"],
+        "selected": []
+      },
+      "year_range": {
+        "name": "Year Range",
+        "values": [2020,2030],
+        "selected": []
+      },
+      "filters": [
+        {
+          "name": "Oem",
+          "type": "select",
+          "values": ["FAW-VW","SAIC-VW","Audi"],
+          "selected": []
+        },
+        {
+          "name": "Brand",
+          "values": ["VW","Audi","Jetta"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "FuelTypeGroup",
+          "values": ["ICE","NEV"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "BuildType",
+          "values": ["CKD","FBU"],
+          "type": "select",
+          "selected": []
+        }
+
+      ],
+      "group_by": {
+        "name": "Group By",
+        "values": ["Oem","Brand"],
+        "selected": []
+      },
+      "compute_methods": {
+        "divisor": {
+          "name": "Divior",
+          "values": [""],
+          "selected": []
+        },
+        "divided_by": {
+          "name": "Divided By",
+          "values": ["Total","ICE","BEV","PHEV"],
+          "selected": []
+        }
+      }
+
+    },
+    {
+      "name": "Report 2",
+      "is_visible": 1,
+      "pr_round": {
+        "name": "PR Round",
+        "values": ["PR67.SP","PR67.OP"],
+        "selected": []
+      },
+      "year_range": {
+        "name": "Year Range",
+        "values": [2020,2030],
+        "selected": []
+      },
+      "filters": [
+        {
+          "name": "Oem",
+          "type": "select",
+          "values": ["FAW-VW","SAIC-VW","Audi"],
+          "selected": []
+        },
+        {
+          "name": "Brand",
+          "values": ["VW","Audi","Jetta"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "FuelType",
+          "values": ["ICE","BEV","PHEV"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "BuildType",
+          "values": ["CKD","FBU"],
+          "type": "select",
+          "selected": []
+        }
+
+      ],
+      "group_by": {
+        "name": "Group By",
+        "values": ["Oem","Brand"],
+        "selected": []
+      },
+      "compute_methods": {
+        "divisor": {
+          "name": "Divior",
+          "values": [""],
+          "selected": []
+        },
+        "divided_by": {
+          "name": "Divided By",
+          "values": ["Total","ICE","BEV","PHEV"],
+          "selected": []
+        }
+      }
+
+    },
+    {
+      "name": "Report 3",
+      "is_visible": 1,
+      "pr_round": {
+        "name": "PR Round",
+        "values": ["PR67.SP","PR67.OP"],
+        "selected": []
+      },
+      "year_range": {
+        "name": "Year Range",
+        "values": [2020,2030],
+        "selected": []
+      },
+      "filters": [
+        {
+          "name": "Oem",
+          "type": "select",
+          "values": ["FAW-VW","SAIC-VW","Audi"],
+          "selected": []
+        },
+        {
+          "name": "Brand",
+          "values": ["VW","Audi","Jetta"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "FuelType",
+          "values": ["ICE","BEV","PHEV"],
+          "type": "select",
+          "selected": []
+        },
+        {
+          "name": "BuildType",
+          "values": ["CKD","FBU"],
+          "type": "select",
+          "selected": []
+        }
+
+      ],
+      "group_by": {
+        "name": "Group By",
+        "values": ["Oem","Brand"],
+        "selected": []
+      },
+      "compute_methods": {
+        "divisor": {
+          "name": "Divior",
+          "values": [""],
+          "selected": []
+        },
+        "divided_by": {
+          "name": "Divided By",
+          "values": ["Total","ICE","BEV","PHEV"],
+          "selected": []
+        }
+      }
+
+    }
+  ]
+}
