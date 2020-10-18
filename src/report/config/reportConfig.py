@@ -1,3 +1,7 @@
+import json
+from typing import List
+
+
 class ReportConfig(object):
     def __init__(self, pr_round, year_range, filters, group_by, compute_methods):
         self.pr_round = pr_round
@@ -43,9 +47,18 @@ class ComputeMethod(object):
         self.selected = selected
 
 
-import json
+class ReportConfigs(object):
+    def __init__(self, reports: List[ReportConfig]):
+        self.reports = reports
+
+
+def json2obj(json_data):
+    configs = ReportConfigs(**json.loads(json_data))
+    return configs
+
 
 if __name__ == "__main__":
     with open('./config.json') as f:
-        data = json.load(f)
-    print(data)
+        data = f.read().replace('\n', '')
+        obj = json2obj(data)
+        print(json.dumps(obj, default=lambda o: o.__dict__, indent=2))
