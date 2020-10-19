@@ -1,4 +1,5 @@
 import json
+from os.path import dirname, join
 from typing import List
 
 
@@ -58,7 +59,7 @@ def json2obj(json_data):
 
 
 if __name__ == "__main__":
-    with open('./config.json') as f:
+    with open(join(dirname(__file__), '../sample/config.json')) as f:
         data = f.read().replace('\n', '')
         obj = json2obj(data)
         print(json.dumps(obj, default=lambda o: o.__dict__, indent=2))
