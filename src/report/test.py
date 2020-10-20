@@ -9,6 +9,32 @@ from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.enum.chart import XL_CHART_TYPE
 from pptx.enum.chart import XL_MARKER_STYLE
 
+
+def get_star_year(d):
+   last_val = 0
+   year = 0
+   for key, val in reversed(d.items()):
+      if last_val == 0 and val != 0:
+         year = key
+         break
+      else:
+         last_val = val
+   return year
+
+
+def get_PA_NF_status(code):
+   is_num = code[-1].isdigit()
+   status = 'NF'
+   if is_num:
+      status = 'PA'
+   return status
+
+print(get_PA_NF_status('hdhhdhhd_'))
+
+dict1 = {2017: 0, 2018: 0, 2019: 0, 2020: 3258, 2021: 0, 2022: 0, 2023: 1}
+print('maoyadong')
+print(get_star_year(dict1))
+
 prs = Presentation()
 
 slide = prs.slides.add_slide(prs.slide_layouts[6])  # 在幻灯片中加入一页6号风格（空白）幻灯片

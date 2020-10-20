@@ -16,7 +16,7 @@ if __name__ == '__main__':
     df_vw = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 0)
     df_mkt = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 1)
     prs = Presentation('c:/auto-report/cover.pptx')
-    title_only_slide_layout = prs.slide_layouts[0]
+    title_only_slide_layout = prs.slide_layouts[1]
     slide = prs.slides.add_slide(title_only_slide_layout)
     shapes = slide.shapes
 
@@ -137,64 +137,105 @@ if __name__ == '__main__':
         year_not_platform_vol['PHEV'] = year_phev_vol
         year_not_platform_vol['OTHER NEV'] = year_other_nev_vol
 
-    #开始绘制柱状图------------------------------------
-    # 设置柱状图图y轴坐标和
-    chart_data_cluster = CategoryChartData()
-    chart_data_cluster.categories = data_years
+    # #开始绘制柱状图------------------------------------
+    # # 设置柱状图图y轴坐标和
+    # chart_data_cluster = CategoryChartData()
+    # chart_data_cluster.categories = data_years
+    #
+    # # 设置柱状图的series数据--------------------------------
+    # series_Volumes1 = [vol / 1000 for vol in year_fuel_group_volumes]
+    # print(year_fuel_group_volumes)
+    # chart_data_cluster.add_series(fuel_type_group_filter + ' VOL', series_Volumes1)
+    # #chart_data_cluster.add_series(fuel_type_group_filter + ' VOL2', series_Volumes1)
+    #
+    # x, y, cx, cy = Cm(1), Cm(7.3), Cm(24), Cm(5)
+    # graphic_frame_cluster = slide.shapes.add_chart(
+    #     XL_CHART_TYPE.COLUMN_CLUSTERED, x, y, cx, cy, chart_data_cluster
+    # )
+    #
+    # chart_cluster = graphic_frame_cluster.chart
+    # # chart_stack.has_title = True
+    # # chart_stack.chart_title.has_text_frame = True
+    # # chart_stack.chart_title.text_frame.text = "maoyadong"
+    # # chart_stack.chart_title.text_frame.paragraphs[0].font.size = Pt(10)
+    #
+    # chart_cluster.has_legend = True
+    # chart_cluster.legend.position = XL_LEGEND_POSITION.LEFT  # XL_LEGEND_POSITION.CORNER
+    # chart_cluster.legend.include_in_layout = False
+    # chart_cluster.legend.font.size = Pt(10)
+    #
+    # for cluster_serie in chart_cluster.series:
+    #     cluster_serie.data_labels.show_value = True
+    #     cluster_serie.data_labels.number_format = '0'
+    #     cluster_serie.data_labels.font.size = Pt(8)
+    #     # stack_serie.data_labels.position = XL_DATA_LABEL_POSITION.ABOVE
+    #
+    # value_axis_cluster = chart_cluster.value_axis
+    # value_axis_cluster.has_major_gridlines = False
+    # value_axis_cluster.major_tick_mark = XL_TICK_MARK.NONE
+    # value_axis_cluster.tick_label_position = XL_TICK_LABEL_POSITION.NONE
+    # value_axis_cluster.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
+    # value_axis_cluster.visible = False
+    #
+    # category_axis_cluster = chart_cluster.category_axis
+    # category_axis_cluster.has_major_gridlines = False
+    # category_axis_cluster.major_tick_mark = XL_TICK_MARK.NONE
+    # category_axis_cluster.tick_label_position = XL_TICK_LABEL_POSITION.LOW #NONE
+    # category_axis_cluster.tick_labels.font.size = Pt(8)
+    # category_axis_cluster.format.line.dash_style = MSO_LINE_DASH_STYLE.SOLID
+    # category_axis_cluster.visible = True
+    #
+    # # 开始创建点线图-----------------------------------
+    # chart_data_line = ChartData()
+    # chart_data_line.categories = data_years
+    #
+    # # 设置折线图的series数据--------------------------------
+    # print(ms_year_fuel_group_list)
+    # chart_data_line.add_series(fuel_type_group_filter + ' MS%', ms_year_fuel_group_list)
+    # #chart_data_line.add_series(fuel_type_group_filter + ' MS%2', ms_year_fuel_group_list)
+    #
+    # x, y, cx, cy = Cm(1), Cm(5.5), Cm(24), Cm(3)
+    # chart_line = slide.shapes.add_chart(
+    #     XL_CHART_TYPE.LINE, x, y, cx, cy, chart_data_line
+    # ).chart
 
-    # 设置柱状图的series数据--------------------------------
-    series_Volumes1 = [vol / 1000 for vol in year_fuel_group_volumes]
-    print(year_fuel_group_volumes)
-    chart_data_cluster.add_series(fuel_type_group_filter + ' VOL', series_Volumes1)
-    #chart_data_cluster.add_series(fuel_type_group_filter + ' VOL2', series_Volumes1)
+    # chart_line.has_legend = True
+    # chart_line.legend.include_in_layout = False
+    # chart_line.legend.position = XL_LEGEND_POSITION.LEFT
+    # chart_line.legend.font.size = Pt(7)
+    #
+    # for line_serie in chart_line.series:
+    #     line_serie.smooth = True
+    #     line_serie.marker.style = XL_MARKER_STYLE.CIRCLE
+    #     line_serie.data_labels.show_value = True
+    #     line_serie.data_labels.number_format = '0.00%'
+    #     line_serie.data_labels.font.size = Pt(8)
+    #
+    # chart_line.series[0].data_labels.position = XL_LABEL_POSITION.ABOVE
+    # #chart_line.series[1].data_labels.position = XL_LABEL_POSITION.BELOW
+    #
+    # value_axis_line = chart_line.value_axis
+    # value_axis_line.has_major_gridlines = False
+    # value_axis_line.major_tick_mark = XL_TICK_MARK.NONE
+    # value_axis_line.tick_label_position = XL_TICK_LABEL_POSITION.NONE
+    # value_axis_line.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
+    # value_axis_line.visible = False
+    #
+    # category_axis_line = chart_line.category_axis
+    # category_axis_line.has_major_gridlines = False
+    # category_axis_line.major_tick_mark = XL_TICK_MARK.NONE
+    # category_axis_line.tick_label_position = XL_TICK_LABEL_POSITION.NONE
+    # category_axis_line.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
+    # category_axis_line.visible = False
 
-    x, y, cx, cy = Cm(1), Cm(7.3), Cm(24), Cm(5)
-    graphic_frame_cluster = slide.shapes.add_chart(
-        XL_CHART_TYPE.COLUMN_CLUSTERED, x, y, cx, cy, chart_data_cluster
-    )
-
-    chart_cluster = graphic_frame_cluster.chart
-    # chart_stack.has_title = True
-    # chart_stack.chart_title.has_text_frame = True
-    # chart_stack.chart_title.text_frame.text = "maoyadong"
-    # chart_stack.chart_title.text_frame.paragraphs[0].font.size = Pt(10)
-
-    chart_cluster.has_legend = True
-    chart_cluster.legend.position = XL_LEGEND_POSITION.LEFT  # XL_LEGEND_POSITION.CORNER
-    chart_cluster.legend.include_in_layout = False
-    chart_cluster.legend.font.size = Pt(10)
-
-    for cluster_serie in chart_cluster.series:
-        cluster_serie.data_labels.show_value = True
-        cluster_serie.data_labels.number_format = '0'
-        cluster_serie.data_labels.font.size = Pt(8)
-        # stack_serie.data_labels.position = XL_DATA_LABEL_POSITION.ABOVE
-
-    value_axis_cluster = chart_cluster.value_axis
-    value_axis_cluster.has_major_gridlines = False
-    value_axis_cluster.major_tick_mark = XL_TICK_MARK.NONE
-    value_axis_cluster.tick_label_position = XL_TICK_LABEL_POSITION.NONE
-    value_axis_cluster.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
-    value_axis_cluster.visible = False
-
-    category_axis_cluster = chart_cluster.category_axis
-    category_axis_cluster.has_major_gridlines = False
-    category_axis_cluster.major_tick_mark = XL_TICK_MARK.NONE
-    category_axis_cluster.tick_label_position = XL_TICK_LABEL_POSITION.LOW #NONE
-    category_axis_cluster.tick_labels.font.size = Pt(8)
-    category_axis_cluster.format.line.dash_style = MSO_LINE_DASH_STYLE.SOLID
-    category_axis_cluster.visible = True
-
+    #开始创建折线图
+    top_base = 3
     # 开始创建点线图-----------------------------------
     chart_data_line = ChartData()
     chart_data_line.categories = data_years
-
-    # 设置折线图的series数据--------------------------------
-    print(ms_year_fuel_group_list)
     chart_data_line.add_series(fuel_type_group_filter + ' MS%', ms_year_fuel_group_list)
-    #chart_data_line.add_series(fuel_type_group_filter + ' MS%2', ms_year_fuel_group_list)
 
-    x, y, cx, cy = Cm(1), Cm(5.5), Cm(24), Cm(3)
+    x, y, cx, cy = Cm(1), Cm(top_base), Cm(24), Cm(4)
     chart_line = slide.shapes.add_chart(
         XL_CHART_TYPE.LINE, x, y, cx, cy, chart_data_line
     ).chart
@@ -202,17 +243,16 @@ if __name__ == '__main__':
     chart_line.has_legend = True
     chart_line.legend.include_in_layout = False
     chart_line.legend.position = XL_LEGEND_POSITION.LEFT
-    chart_line.legend.font.size = Pt(7)
+    chart_line.legend.font.size = Pt(8)
+    chart_line.chart_title.text_frame.clear()
 
     for line_serie in chart_line.series:
         line_serie.smooth = True
         line_serie.marker.style = XL_MARKER_STYLE.CIRCLE
         line_serie.data_labels.show_value = True
-        line_serie.data_labels.number_format = '0.00%'
-        line_serie.data_labels.font.size = Pt(8)
-
-    chart_line.series[0].data_labels.position = XL_LABEL_POSITION.ABOVE
-    #chart_line.series[1].data_labels.position = XL_LABEL_POSITION.BELOW
+        line_serie.data_labels.number_format = '0.0%'
+        line_serie.data_labels.font.size = Pt(10)
+        line_serie.data_labels.position = XL_LABEL_POSITION.ABOVE
 
     value_axis_line = chart_line.value_axis
     value_axis_line.has_major_gridlines = False
@@ -228,6 +268,58 @@ if __name__ == '__main__':
     category_axis_line.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
     category_axis_line.visible = False
 
+    # 开始创建柱状堆积图---------------------------------
+    chart_data_stack = CategoryChartData()
+    chart_data_stack.categories = data_years
+
+    series_Volumes1 = [vol / 1000 for vol in year_fuel_group_volumes]
+    series_Volumes2 = [0] * len(data_years)
+    chart_data_stack.add_series(fuel_type_group_filter + ' VOL', series_Volumes1)
+    chart_data_stack.add_series('', series_Volumes2)
+
+
+    x, y, cx, cy = Cm(1), Cm(top_base + 3), Cm(24), Cm(7)
+    graphic_frame_stack = slide.shapes.add_chart(
+        XL_CHART_TYPE.COLUMN_STACKED, x, y, cx, cy, chart_data_stack
+    )
+
+    chart_stack = graphic_frame_stack.chart
+    # chart_stack.has_title = True
+    # chart_stack.chart_title.has_text_frame = True
+    # chart_stack.chart_title.text_frame.text = "maoyadong"
+    # chart_stack.chart_title.text_frame.paragraphs[0].font.size = Pt(10)
+
+    chart_stack.has_legend = True
+    chart_stack.legend.position = XL_LEGEND_POSITION.LEFT  # XL_LEGEND_POSITION.CORNER
+    chart_stack.legend.include_in_layout = False
+    chart_stack.legend.font.size = Pt(10)
+
+    series_stack_0 = chart_stack.series[0]
+    series_stack_1 = chart_stack.series[1]
+    series_stack_0.data_labels.show_value = True
+    series_stack_0.data_labels.number_format = '0'
+    series_stack_1.data_labels.font.size = Pt(10)
+    series_stack_1.data_labels.show_value = False
+    series_stack_1.format.fill.patterned()  # 设置为可更改填充颜色的
+    series_stack_1.format.fill.solid()  # 设置为纯色填充
+    series_stack_1.format.fill.fore_color.rgb = RGBColor(255, 255, 255)  # 白色
+
+    series_stack_0.data_labels.font.size = Pt(10)
+
+    value_axis_stack = chart_stack.value_axis
+    value_axis_stack.has_major_gridlines = False
+    value_axis_stack.major_tick_mark = XL_TICK_MARK.NONE
+    value_axis_stack.tick_label_position = XL_TICK_LABEL_POSITION.NONE
+    value_axis_stack.format.line.dash_style = MSO_LINE_DASH_STYLE.ROUND_DOT
+    value_axis_stack.visible = False
+
+    category_axis_stack = chart_stack.category_axis
+    category_axis_stack.has_major_gridlines = False
+    category_axis_stack.major_tick_mark = XL_TICK_MARK.NONE
+    category_axis_stack.tick_label_position = XL_TICK_LABEL_POSITION.LOW
+    category_axis_stack.tick_labels.font.size = Pt(10)
+    category_axis_stack.format.line.dash_style = MSO_LINE_DASH_STYLE.SOLID
+    category_axis_stack.visible = True
 
     # 开始创建表格
     #计算表格的行数和列数
@@ -236,7 +328,7 @@ if __name__ == '__main__':
 
     table_width = 24
     table_height = 2
-    top = Cm(12.3)
+    top = Cm(top_base + 10)
     left = Cm(1.5)  # Inches(2.0)
     width = Cm(table_width)  # Inches(6.0)
     height = Cm(table_height)  # Inches(0.8)
@@ -296,11 +388,11 @@ if __name__ == '__main__':
             cell.text = r'/'
         for paragraph in cell.text_frame.paragraphs:
             for run in paragraph.runs:
-                run.font.size = Pt(8)
+                run.font.size = Pt(10)
 
     # 开始添加注释文本框
     left = Cm(1)  # left，top为相对位置
-    top = Cm(4)
+    top = Cm(top_base - 1)
     width = Cm(2)  # width，height为文本框的大小
     height = Cm(1)
 
@@ -312,7 +404,7 @@ if __name__ == '__main__':
     para = tf.add_paragraph()  # 新增段落
     para.text = "Volume '000units"  # 向段落写入文字
     para.line_spacing = 1.5  # 1.5 倍的行距
-    para.font.size = Pt(6)
+    para.font.size = Pt(8)
 
     prs.save('c:/auto-report/template_tmp4.pptx')
     print("maoyadong")

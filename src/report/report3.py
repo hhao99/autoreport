@@ -16,7 +16,7 @@ if __name__ == '__main__':
     df_vw = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 0)
     df_mkt = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 1)
     prs = Presentation('c:/auto-report/cover.pptx')
-    title_only_slide_layout = prs.slide_layouts[0]
+    title_only_slide_layout = prs.slide_layouts[1]
     slide = prs.slides.add_slide(title_only_slide_layout)
     shapes = slide.shapes
 
@@ -128,6 +128,7 @@ if __name__ == '__main__':
     print(year_category_vol)
     print(year_category_ms)
 
+    top_base = 2
     # 开始创建点线图-----------------------------------
     chart_data_line = ChartData()
     chart_data_line.categories = data_years
@@ -136,7 +137,7 @@ if __name__ == '__main__':
     for fuel in fuel_type_order:
         chart_data_line.add_series(fuel, ms_year_fuel_dict[fuel])
 
-    x, y, cx, cy = Cm(1), Cm(4.5), Cm(24), Cm(3)
+    x, y, cx, cy = Cm(1), Cm(top_base), Cm(24), Cm(5)
     chart_line = slide.shapes.add_chart(
         XL_CHART_TYPE.LINE, x, y, cx, cy, chart_data_line
     ).chart
@@ -175,7 +176,7 @@ if __name__ == '__main__':
     for fuel in fuel_type_order:
         chart_data_stack.add_series(fuel, [vol / 1000 for vol in vol_year_fuel_dict[fuel]])
 
-    x, y, cx, cy = Cm(1), Cm(6.3), Cm(24), Cm(4.5)
+    x, y, cx, cy = Cm(1), Cm(top_base + 4), Cm(24), Cm(5)
     graphic_frame_stack = slide.shapes.add_chart(
         XL_CHART_TYPE.COLUMN_STACKED, x, y, cx, cy, chart_data_stack
     )
@@ -224,7 +225,7 @@ if __name__ == '__main__':
     cols = len(data_years) + 1
     table_width = 24
     table_height = 2
-    top = Cm(10.7)
+    top = Cm(top_base + 9)
     left = Cm(1.5)  # Inches(2.0)
     width = Cm(table_width)  # Inches(6.0)
     height = Cm(table_height)  # Inches(0.8)
@@ -289,7 +290,7 @@ if __name__ == '__main__':
 
     # 开始添加注释文本框
     left = Cm(1)  # left，top为相对位置
-    top = Cm(4)
+    top = Cm(top_base - 0.5)
     width = Cm(2)  # width，height为文本框的大小
     height = Cm(1)
 
