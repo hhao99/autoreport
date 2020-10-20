@@ -3,59 +3,57 @@ from os.path import dirname, join
 from typing import List
 
 
-class ReportConfig(object):
-    def __init__(self, pr_round, year_range, filters, group_by, compute_methods):
-        self.pr_round = pr_round
-        self.year_rang = year_range
-        self.filters = filters
-        self.group_by = group_by
-        self.compute_methods = compute_methods
-
-
-class PRRound(object):
-    def __init__(self, name, values, selected):
-        self.name = name
-        self.values = values
-        self.selected = selected
-
-
-class YearRange(object):
-    def __init__(self, name, values, selected):
-        self.name = name
-        self.values = values
-        self.selected = selected
-
-
-class ReportFilter(object):
-    def __init__(self, name, value_type, values, selected):
-        self.name = name
-        self.value_type = value_type
-        self.values = values
-        self.selected = selected
-
-
-class GroupBy(object):
-    def __init__(self, name, values, selected):
-        self.name = name
-        self.values = values
-        self.selected = selected
+class ConfigPack(object):
+    def __init__(self, name, values=None, selected=None):
+        if selected is None:
+            selected = []
+        if values is None:
+            values = []
+        self.name, self.values, self.selected = name, values, selected
 
 
 class ComputeMethod(object):
-    def __init__(self, name, values, selected):
+    def __init__(self, method_name, name, values, selected=None):
+        if selected is None:
+            selected = []
+        self.method_name = method_name
         self.name = name
         self.values = values
         self.selected = selected
 
 
-class ReportConfigs(object):
-    def __init__(self, reports: List[ReportConfig]):
-        self.reports = reports
+method_divided_by = ComputeMethod('divided_by', 'Divided By', ['Total', 'ICE', 'BEV', 'PHEV'])
 
 
-def json2obj(json_data):
-    configs = ReportConfigs(**json.loads(json_data))
-    return configs
+class GlobalConfig(object):
+    def __init__(self, filters=None, page_include=ConfigPack('Slide Include...'),
+                 pr_state=ConfigPack('PR_State'), pr_state_2=ConfigPack('PR_State')):
+        if filters is None:
+            filters = []
+        self.name = 'global'
+        self.filters = filters
+        self.page_include = page_include
+        self.pr_state = pr_state
+        self.pr_state_2 = pr_state_2
+
+
+class SlideConfig(object):
+    def __init__(self, name='', filters=None, group_by=ConfigPack('group_by'),
+                 computer_methods: List[ComputeMethod] = None, img='', included=False):
+        if filters is None:
+            filters = []
+        self.name = name
+        self.filters = filters
+        self.group_by = group_by
+        self.computer_methods = computer_methods
+        self.img = img
+        self.included = included
+
+
+class ReportConfig(object):
+    def __init__(self, global_config: GlobalConfig, slides_config: List[SlideConfig]):
+        self.global_config = global_config
+        self.slides_config = slides_config
 
 
 if __name__ == "__main__":

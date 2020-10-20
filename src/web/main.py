@@ -22,7 +22,7 @@ def index():
     return "Report Automation Backend services - version 0.1 20200922"
 
 
-@app.route('/get/<field>')
+@app.route('/get/<field>', methods=['GET'])
 def field_query(field):
     df = pd.read_csv(app.config['PLANNING_DATA'])
     df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
@@ -30,12 +30,23 @@ def field_query(field):
     return jsonify(list(set(values)))
 
 
-@app.route('/queryby/<field>/<value>/<target_field>')
+@app.route('/queryby/<field>/<value>/<target_field>', methods=['GET'])
 def query_by(field, value, target_field):
     df = pd.read_excel(app.config['DATA_PATH'])
     df1 = df[df[field] == value]
     return jsonify(list(set(df1[target_field])))
 
+
+@app.route('/config', methods=['GET'])
+def data_config():
+    df = pd.read_csv(app.config['PLANNING_DATA'])
+    df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
+
+
+
+@app.route('/report/config', methods=['POST'])
+def generate_report(config):
+    pass
 
 
 # Press the green button in the gutter to run the script.
