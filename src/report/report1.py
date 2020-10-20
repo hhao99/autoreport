@@ -7,7 +7,6 @@ from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.enum.dml import MSO_LINE_DASH_STYLE
 from pptx.util import Cm  # Inches
 from pptx.util import Pt
-from config.report import *
 
 
 class Report1(object):

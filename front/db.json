@@ -1,0 +1,357 @@
+{
+  "config": {
+    "global": {
+      "filters": [
+        {
+          "name": "OEM",
+          "selected": [
+            "FAW-VW"
+          ],
+          "values": [
+            "FAW-VW",
+            "SAIC-VW",
+            "Audi"
+          ]
+        },
+        {
+          "name": "Brand",
+          "selected": [
+            "VW"
+          ],
+          "values": [
+            "VW",
+            "Audi",
+            "Jetta"
+          ]
+        },
+        {
+          "name": "Build_Type",
+          "selected": [
+            "FBU"
+          ],
+          "values": [
+            "CKD",
+            "FBU"
+          ]
+        },
+        {
+          "name": "YEAR",
+          "selected": [
+            2020,
+            2021,
+            2023
+          ],
+          "values": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        }
+      ],
+      "pr_state": {
+        "name": "PR_State",
+        "selected": [
+          "PR67.OP"
+        ],
+        "values": [
+          "PR67.SP",
+          "PR67.OP"
+        ]
+      },
+      "pr_state_2": {
+        "name": "PR_State",
+        "selected": [
+          "PR67.OP"
+        ],
+        "values": [
+          "PR67.SP",
+          "PR67.OP"
+        ]
+      }
+    },
+    "slides": [
+      {
+        "compute_methods": {
+          "divided_by": {
+            "name": "Divided By",
+            "selected": [
+              "Total"
+            ],
+            "values": [
+              "Total",
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        },
+        "filters": [
+          {
+            "name": "Fuel_Type",
+            "selected": [
+              "PHEV"
+            ],
+            "type": "select",
+            "values": [
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        ],
+        "group_by": {
+          "name": "Group By",
+          "selected": [
+            "Brand",
+            "Oem"
+          ],
+          "values": [
+            "Oem",
+            "Brand"
+          ]
+        },
+        "img": "p1.png",
+        "included": false,
+        "name": "page 1"
+      },
+      {
+        "compute_methods": {
+          "divided_by": {
+            "name": "Divided By",
+            "selected": [],
+            "values": [
+              "Total",
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        },
+        "filters": [
+          {
+            "name": "FuelTypeGroup",
+            "selected": [],
+            "type": "select",
+            "values": [
+              "ICE",
+              "NEV"
+            ]
+          }
+        ],
+        "group_by": {
+          "name": "Group By",
+          "selected": [
+            "Brand"
+          ],
+          "values": [
+            "Oem",
+            "Brand"
+          ]
+        },
+        "img": "p2.png",
+        "included": true,
+        "name": "page 2"
+      },
+      {
+        "compute_methods": {
+          "divided_by": {
+            "name": "Divided By",
+            "selected": [],
+            "values": [
+              "Total",
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        },
+        "filters": [
+          {
+            "name": "FuelType",
+            "selected": [],
+            "type": "select",
+            "values": [
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        ],
+        "group_by": {
+          "name": "Group By",
+          "selected": [],
+          "values": [
+            "Oem",
+            "Brand"
+          ]
+        },
+        "img": "p3.png",
+        "included": false,
+        "name": "page 3"
+      },
+      {
+        "compute_methods": {
+          "divided_by": {
+            "name": "Divided By",
+            "selected": [],
+            "values": [
+              "Total",
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        },
+        "filters": [
+          {
+            "name": "FuelType",
+            "selected": [
+              "BEV",
+              "PHEV"
+            ],
+            "type": "select",
+            "values": [
+              "ICE",
+              "BEV",
+              "PHEV"
+            ]
+          }
+        ],
+        "group_by": {
+          "name": "Group By",
+          "selected": [
+            "Brand"
+          ],
+          "values": [
+            "Oem",
+            "Brand"
+          ]
+        },
+        "img": "p4.png",
+        "included": true,
+        "name": "page 4"
+      },
+      {
+          "compute_methods": {
+            "divided_by": {
+              "name": "Divided By",
+              "selected": [
+                "Total"
+              ],
+              "values": [
+                "Total",
+                "ICE",
+                "BEV",
+                "PHEV"
+              ]
+            }
+          },
+          "filters": [
+            {
+              "name": "Fuel_Type",
+              "selected": [
+                "PHEV"
+              ],
+              "type": "select",
+              "values": [
+                "ICE",
+                "BEV",
+                "PHEV"
+              ]
+            }
+          ],
+          "group_by": {
+            "name": "Group By",
+            "selected": [
+              "Brand",
+              "Oem"
+            ],
+            "values": [
+              "Oem",
+              "Brand"
+            ]
+          },
+          "img": "p5.png",
+          "included": false,
+          "name": "page 5"
+        },
+        {
+          "compute_methods": {
+            "divided_by": {
+              "name": "Divided By",
+              "selected": [],
+              "values": [
+                "Total",
+                "ICE",
+                "BEV",
+                "PHEV"
+              ]
+            }
+          },
+          "filters": [
+            {
+              "name": "FuelTypeGroup",
+              "selected": [],
+              "type": "select",
+              "values": [
+                "ICE",
+                "NEV"
+              ]
+            }
+          ],
+          "group_by": {
+            "name": "Group By",
+            "selected": [
+              "Brand"
+            ],
+            "values": [
+              "Oem",
+              "Brand"
+            ]
+          },
+          "img": "p6.png",
+          "included": true,
+          "name": "page 6"
+        },
+        {
+          "compute_methods": {
+            "divided_by": {
+              "name": "Divided By",
+              "selected": [],
+              "values": [
+                "Total",
+                "ICE",
+                "BEV",
+                "PHEV"
+              ]
+            }
+          },
+          "filters": [
+            {
+              "name": "FuelType",
+              "selected": [],
+              "type": "select",
+              "values": [
+                "ICE",
+                "BEV",
+                "PHEV"
+              ]
+            }
+          ],
+          "group_by": {
+            "name": "Group By",
+            "selected": [],
+            "values": [
+              "Oem",
+              "Brand"
+            ]
+          },
+          "img": "p7.png",
+          "included": false,
+          "name": "page 7"
+        }
+    ]
+  }
+}

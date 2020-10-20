@@ -1,7 +1,9 @@
 from flask import Flask, make_response, jsonify
-from config.globals import DevelopmentConfig
+from main.config import DevelopmentConfig
 import pandas as pd
 import traceback
+from main.config import gen_config
+import json
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig())
@@ -41,6 +43,7 @@ def query_by(field, value, target_field):
 def data_config():
     df = pd.read_csv(app.config['PLANNING_DATA'])
     df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
+    return json.dumps(gen_config(df), default=lambda o: o.__dict__, indent=2)
 
 
 @app.route('/report/config', methods=['POST'])
