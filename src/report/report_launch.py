@@ -1,5 +1,5 @@
-from report1 import Report1
-from report2 import Report2
+from report.report1 import Report1
+from report.report2 import Report2
 
 
 def RunAll(config):

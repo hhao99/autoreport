@@ -3,6 +3,7 @@ from pptx.enum.dml import MSO_THEME_COLOR
 from pptx.util import Pt
 from pptx import Presentation
 import pandas as pd
+from os.path import dirname, join
 
 class ReportBase(object):
     def __init__(self, reportId):
@@ -12,6 +13,8 @@ class ReportBase(object):
         # open ppt with cover
         # self.df_vw = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 2)
         # self.df_mkt = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 3)
+        database_small_demo = join(dirname(__file__), '../sample/Database_small_demo.xlsx')
+
         self.vw_path = r'c:/auto-report/Database_small_demo.xlsx'
         self.mkt_path = r'c:/auto-report/Database_small_demo.xlsx'
         self.template_path = r'c:/auto-report/cover.pptx'

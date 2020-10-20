@@ -1,18 +1,15 @@
-from pptx import Presentation
-from pptx.enum.dml import MSO_LINE_DASH_STYLE
-from pptx.util import Inches, Pt
-from pptx import Presentation
-from pptx.chart.data import ChartData, CategoryChartData
-from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
-from pptx.util import Cm  # Inches
+from collections import OrderedDict
+
 from pandas import np
-from pptx.enum.chart import XL_LEGEND_POSITION
-from collections import Counter, OrderedDict
+from pptx.chart.data import ChartData, CategoryChartData
 from pptx.dml.color import RGBColor
-import pandas as pd
-from report_common import ReportBase
-import report_common
-import report_logger
+from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
+from pptx.enum.chart import XL_LEGEND_POSITION
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
+from pptx.util import Cm  # Inches
+from pptx.util import Pt
+
+from report.report_common import ReportBase
 
 
 # if __name__ == '__main__':
@@ -35,7 +32,6 @@ class Report1(ReportBase):
         # 根据所有filter过滤大众数据和mkt数据
         df_vw_filter = self.df_vw_filter
         df_mkt_filter = self.df_mkt_filter
-
 
         fuel_type = self.fuel_type_group_all
         fuel_type_group = self.fuel_type_group_all
@@ -60,7 +56,8 @@ class Report1(ReportBase):
                 else:
                     report_logger.record_log('report1', 'vw', PR_Status_local, year, '', fuel)
 
-                if not df_mkt_sum[(df_mkt_sum['Fuel_type'].isin(fuel_type_calculate)) & (df_mkt_sum['Year'] == year)].empty:
+                if not df_mkt_sum[
+                    (df_mkt_sum['Fuel_type'].isin(fuel_type_calculate)) & (df_mkt_sum['Year'] == year)].empty:
                     mkt_volume = \
                         df_mkt_sum[(df_mkt_sum['Fuel_type'].isin(fuel_type_calculate)) & (df_mkt_sum['Year'] == year)] \
                             .agg({'Volume': np.sum}).reset_index().iat[0, 1]
@@ -104,7 +101,6 @@ class Report1(ReportBase):
             total_year_rate_dict[year] = all_mkt_rate
             total_year_vol_dict[year] = all_vw_volume
         print('total_year_rate_dict=' + str(total_year_rate_dict))
-
 
         top_base = 3
         # 开始创建点线图-----------------------------------
@@ -262,5 +258,3 @@ class Report1(ReportBase):
         # 在指定位置添加文本框
         textbox = shapes.add_textbox(left, top, width, height)
         report_common.set_textbox_format(textbox, Pt(8), "Volume\n'000units")
-
-

@@ -1,15 +1,12 @@
-from pptx import Presentation
-from pptx.enum.dml import MSO_LINE_DASH_STYLE
-from pptx.util import Inches, Pt
+import pandas as pd
+from pandas import np
 from pptx import Presentation
 from pptx.chart.data import ChartData, CategoryChartData
-from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_DATA_LABEL_POSITION
-from pptx.util import Cm  # Inches
-from pandas import np
+from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE
 from pptx.enum.chart import XL_LEGEND_POSITION
-
-from pptx.dml.color import RGBColor
-import pandas as pd
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
+from pptx.util import Cm  # Inches
+from pptx.util import Pt
 
 if __name__ == '__main__':
 

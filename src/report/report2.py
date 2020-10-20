@@ -1,20 +1,15 @@
-from pptx import Presentation
-from pptx.enum.dml import MSO_LINE_DASH_STYLE
-from pptx.util import Inches, Pt
-from pptx import Presentation
-from pptx.chart.data import ChartData, CategoryChartData
-from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
-from pptx.util import Cm  # Inches
-from pandas import np
-from pptx.enum.chart import XL_LEGEND_POSITION
-import math
-from collections import Counter, OrderedDict
-from report_common import ReportBase
-import report_common
-import report_logger
+from collections import OrderedDict
 
-from pptx.dml.color import RGBColor
-import pandas as pd
+from pandas import np
+from pptx.chart.data import ChartData
+from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
+from pptx.enum.chart import XL_LEGEND_POSITION
+from pptx.enum.dml import MSO_LINE_DASH_STYLE
+from pptx.util import Cm  # Inches
+from pptx.util import Pt
+
+from report.report_common import ReportBase
+
 
 class Report2(ReportBase):
 
