@@ -43,7 +43,6 @@ def data_config():
     df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
 
 
-
 @app.route('/report/config', methods=['POST'])
 def generate_report(config):
     pass

@@ -52,8 +52,13 @@ class SlideConfig(object):
 
 class ReportConfig(object):
     def __init__(self, global_config: GlobalConfig, slides_config: List[SlideConfig]):
-        self.global_config = global_config
-        self.slides_config = slides_config
+        self.Global = global_config
+        self.Slides = slides_config
+
+
+def json2obj(json_data):
+    configs = ReportConfig(**json.loads(json_data))
+    return configs
 
 
 if __name__ == "__main__":

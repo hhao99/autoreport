@@ -22,6 +22,7 @@ def gen_config(df: DataFrame):
     build_type = ConfigPack(name='Build_Type', values=column_values(df, 'build_type'))
     year = ConfigPack(name="YEAR", values=column_values(df, 'year'))
     global_config = GlobalConfig(filters=[oem, brand, build_type, year], pr_state=pr_status, pr_state_2=pr_status)
+
     config_pack = ReportConfig(global_config, [])
     return config_pack
 
