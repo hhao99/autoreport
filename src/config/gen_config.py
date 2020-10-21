@@ -3,8 +3,8 @@ import json
 import pandas as pd
 from pandas import DataFrame
 
-from main.config import DevelopmentConfig
-from main.config import GlobalConfig, ReportConfig, ConfigPack
+from config.globals import DevelopmentConfig
+from config.report import GlobalConfig, ReportConfig, ConfigPack
 
 data_config = DevelopmentConfig()
 
