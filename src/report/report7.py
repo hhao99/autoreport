@@ -3,7 +3,7 @@ from pptx.enum.dml import MSO_LINE_DASH_STYLE
 from pptx.util import Inches, Pt
 from pptx import Presentation
 from pptx.chart.data import ChartData, CategoryChartData
-from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_DATA_LABEL_POSITION
+from pptx.enum.chart import XL_CHART_TYPE, XL_TICK_MARK, XL_TICK_LABEL_POSITION, XL_MARKER_STYLE, XL_LABEL_POSITION
 from pptx.util import Cm  # Inches
 from pandas import np
 from pptx.enum.chart import XL_LEGEND_POSITION
@@ -16,7 +16,7 @@ if __name__ == '__main__':
     df_vw = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 0)
     df_mkt = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 1)
     prs = Presentation('c:/auto-report/cover.pptx')
-    title_only_slide_layout = prs.slide_layouts[0]
+    title_only_slide_layout = prs.slide_layouts[1]
     slide = prs.slides.add_slide(title_only_slide_layout)
     shapes = slide.shapes
 
@@ -136,6 +136,7 @@ if __name__ == '__main__':
         year_category_ms_change[category] = ms_change_list
     print(year_category_ms_change)
 
+    top_base = 3
     # 开始创建点线图-----------------------------------
     chart_data_line = ChartData()
     chart_data_line.categories = data_years
@@ -145,7 +146,7 @@ if __name__ == '__main__':
     chart_data_line.add_series(PR_Status_previous, series_line_Volumes1)
     chart_data_line.add_series(PR_Status_local, series_line_Volumes2)
 
-    x, y, cx, cy = Cm(1), Cm(4.5), Cm(24), Cm(4)
+    x, y, cx, cy = Cm(1), Cm(top_base), Cm(24), Cm(5)
     chart_line = slide.shapes.add_chart(
         XL_CHART_TYPE.LINE, x, y, cx, cy, chart_data_line
     ).chart
@@ -155,12 +156,24 @@ if __name__ == '__main__':
     chart_line.legend.position = XL_LEGEND_POSITION.LEFT
     chart_line.legend.font.size = Pt(8)
 
-    for line_serie in chart_line.series:
-        line_serie.smooth = False
-        line_serie.marker.style = XL_MARKER_STYLE.CIRCLE
-        line_serie.data_labels.show_value = True
-        line_serie.data_labels.number_format = '0.00%'
-        line_serie.data_labels.font.size = Pt(8)
+    line_serie_1 = chart_line.series[0]
+    line_serie_2 = chart_line.series[1]
+    line_serie_1.smooth = False
+    line_serie_1.marker.style = XL_MARKER_STYLE.CIRCLE
+    line_serie_1.data_labels.show_value = True
+    line_serie_1.data_labels.number_format = '0.0%'
+    line_serie_1.data_labels.font.size = Pt(8)
+    line_serie_2.smooth = False
+    line_serie_2.marker.style = XL_MARKER_STYLE.CIRCLE
+    line_serie_2.data_labels.show_value = True
+    line_serie_2.data_labels.number_format = '0.0%'
+    line_serie_2.data_labels.font.size = Pt(8)
+    if year_ms_previous[0] > year_ms_local[0]:
+        line_serie_1.data_labels.position = XL_LABEL_POSITION.ABOVE
+        line_serie_2.data_labels.position = XL_LABEL_POSITION.BELOW
+    else:
+        line_serie_1.data_labels.position = XL_LABEL_POSITION.BELOW
+        line_serie_2.data_labels.position = XL_LABEL_POSITION.ABOVE
 
     value_axis_line = chart_line.value_axis
     value_axis_line.has_major_gridlines = False
@@ -187,7 +200,7 @@ if __name__ == '__main__':
     chart_data_cluster.add_series(PR_Status_previous, series_Volumes1)
     chart_data_cluster.add_series(PR_Status_local, series_Volumes2)
 
-    x, y, cx, cy = Cm(1), Cm(5.5), Cm(24), Cm(5.5)
+    x, y, cx, cy = Cm(1), Cm(top_base + 2), Cm(24), Cm(6)
     graphic_frame_cluster = slide.shapes.add_chart(
         XL_CHART_TYPE.COLUMN_CLUSTERED, x, y, cx, cy, chart_data_cluster
     )
@@ -239,7 +252,7 @@ if __name__ == '__main__':
     cols = len(data_years) + 1
     table_width = 24
     table_height = 2
-    top = Cm(10.7)
+    top = Cm(top_base + 8)
     left = Cm(1.5)  # Inches(2.0)
     width = Cm(table_width)  # Inches(6.0)
     height = Cm(table_height)  # Inches(0.8)
@@ -299,7 +312,7 @@ if __name__ == '__main__':
 
     # 开始添加注释文本框
     left = Cm(1)  # left，top为相对位置
-    top = Cm(4)
+    top = Cm(top_base - 1)
     width = Cm(2)  # width，height为文本框的大小
     height = Cm(1)
 

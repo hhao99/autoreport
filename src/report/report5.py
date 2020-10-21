@@ -16,6 +16,8 @@ from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.dml.color import RGBColor
 import pandas as pd
 
+import report_common
+
 if __name__ == '__main__':
 
     df_vw = pd.read_excel(r'c:/auto-report/Database_small_demo.xlsx', 0)
@@ -373,20 +375,22 @@ if __name__ == '__main__':
 
 # 添加ppt顶部的椭圆形shapes
     shape = shapes.add_shape(MSO_SHAPE.OVAL, Cm(12.5), Cm(2.3), Cm(2), Cm(1.5))
-    shape.text_frame.word_wrap = False
-    shape.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
-    paragraphs1 = shape.text_frame.paragraphs[0]
-    paragraphs2 = shape.text_frame.add_paragraph()
-    run1 = paragraphs1.add_run()
-    run1.text = format((PR_Status_local_vol - PR_Status_previous_vol) / 1000, '.0f')
-    run1.font.size = font_size
-    run1.font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
-    run2 = paragraphs2.add_run()
-    run2.text = format((PR_Status_local_vol - PR_Status_previous_vol) / PR_Status_previous_vol, '.1%')
-    run2.font.size = font_size
-    run2.font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
-    shape.fill.background()
-    shape.line.width = Pt(0.2)
+    report_common.set_shape_oval_format(shape, font_size, PR_Status_local_vol - PR_Status_previous_vol, \
+                                        (PR_Status_local_vol - PR_Status_previous_vol) / PR_Status_previous_vol)
+    # shape.text_frame.word_wrap = False
+    # shape.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+    # paragraphs1 = shape.text_frame.paragraphs[0]
+    # paragraphs2 = shape.text_frame.add_paragraph()
+    # run1 = paragraphs1.add_run()
+    # run1.text = format((PR_Status_local_vol - PR_Status_previous_vol) / 1000, '.0f')
+    # run1.font.size = font_size
+    # run1.font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
+    # run2 = paragraphs2.add_run()
+    # run2.text = format((PR_Status_local_vol - PR_Status_previous_vol) / PR_Status_previous_vol, '.1%')
+    # run2.font.size = font_size
+    # run2.font.color.theme_color = MSO_THEME_COLOR.ACCENT_1
+    # shape.fill.background()
+    # shape.line.width = Pt(0.2)
 
     # 开始添加单位注释文本框
     # 在指定位置添加文本框
