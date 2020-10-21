@@ -1,12 +1,22 @@
-from flask import Flask, make_response, jsonify
-from main.config import DevelopmentConfig
-import pandas as pd
-import traceback
-from main.config import gen_config
 import json
+
+import traceback
+from flask import Flask, jsonify, make_response
+import pandas as pd
+from config.gen_config import gen_config
+from config.globals import DevelopmentConfig
+import report.report_launch as launch
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig())
+
+
+@app.after_request
+def cors(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Method'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    return response
 
 
 @app.errorhandler(404)
@@ -40,15 +50,15 @@ def query_by(field, value, target_field):
 
 
 @app.route('/config', methods=['GET'])
-def data_config():
+def ppt_config():
     df = pd.read_csv(app.config['PLANNING_DATA'])
     df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
     return json.dumps(gen_config(df), default=lambda o: o.__dict__, indent=2)
 
 
-@app.route('/report/config', methods=['POST'])
+@app.route('/config', methods=['POST'])
 def generate_report(config):
-    pass
+    launch.RunAll(None)
 
 
 # Press the green button in the gutter to run the script.
