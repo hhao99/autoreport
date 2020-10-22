@@ -3,7 +3,7 @@ import json
 import traceback
 from flask import Flask, jsonify, make_response
 import pandas as pd
-from config.gen_config import gen_config
+from config.page import gen_config
 from config.globals import DevelopmentConfig
 import report.report_launch as launch
 
