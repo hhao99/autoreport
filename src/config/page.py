@@ -1,6 +1,19 @@
 import json
-from os.path import dirname, join
 from typing import List
+
+import pandas as pd
+from pandas import DataFrame
+
+from config.globals import DevelopmentConfig
+from config.report import ComputeMethod, GlobalConfig, ReportConfig, ConfigPack, SlideConfig
+
+data_config = DevelopmentConfig()
+
+
+def column_values(df: DataFrame, column_name):
+    values = list(set(df.groupby(column_name).size().reset_index()[column_name]))
+    values.sort()
+    return values
 
 
 class ConfigPack(object):
@@ -60,13 +73,24 @@ class ReportConfig(object):
         self.Slides = slides_config
 
 
-def json2obj(json_data):
-    configs = ReportConfig(**json.loads(json_data))
-    return configs
+def gen_config(df: DataFrame):
+    pr_status = ConfigPack(name='OEM', values=column_values(df, 'pr_status'))
+    oem = ConfigPack(name='OEM', values=column_values(df, 'oem'))
+    brand = ConfigPack(name='Brand', values=column_values(df, 'brand'))
+    build_type = ConfigPack(name='Build_Type', values=column_values(df, 'build_type'))
+    year = ConfigPack(name="YEAR", values=column_values(df, 'year'))
+    fuel_type = ConfigPack(name="Fuel_Type", values=column_values(df, 'fuel_type'))
+    fuel_type_group = ConfigPack(name="Fuel_Type_Group", values=column_values(df, 'fuel_type_group'))
+
+    global_config = GlobalConfig(filters=[oem, brand, build_type, year], pr_state=pr_status, pr_state_2=pr_status)
+
+    slide1 = SlideConfig('page 1', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p1.png', True)
+    config_pack = ReportConfig(global_config, [slide1])
+    return config_pack
 
 
-if __name__ == "__main__":
-    with open(join(dirname(__file__), '../sample/config.json')) as f:
-        data = f.read().replace('\n', '')
-        obj = json2obj(data)
-        print(json.dumps(obj, default=lambda o: o.__dict__, indent=2))
+if __name__ == '__main__':
+    df = pd.read_csv('../sample/planning.csv')
+    df.columns = df.columns.map(lambda x: x.lower().strip().replace(' ', '_').replace('/', '_'))
+    print(json.dumps(gen_config(df), default=lambda o: o.__dict__, indent=2))
