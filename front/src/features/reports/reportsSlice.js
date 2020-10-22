@@ -4,26 +4,28 @@ import axios from 'axios';
 
 
 // const config_url = 'http://localhost:3002/config'
-const config_url = 'http://localhost:5000/'
+//const config_url = 'http://localhost:5000/'
 
 
 const loadConfig = createAsyncThunk('config/load',async ()=> {
     let result, data
-    result = await axios.get(config_url+"config")
-    let config = await result.data
+    // update the request with fetch to use the proxy
+    result = await fetch("/config")
+    let config = await result.json()
 
     // update the filter
 
-    result = await axios.get(config_url+'/get/pr_status')
-    data = await result.data
+    result = await fetch('/get/pr_status')
+    data = await result.json
     config.global.pr_state.values = data
     config.global.pr_state_2.values = data
 
 
     let filters = await Promise.all(config.global.filters.map(async (filter,index)=> {
         try {
-            let result = await axios.get(config_url + '/get/' + filter.name)
-            return {...filter, values: result.data }
+            result = await fetch('/get/' + filter.name)
+            data = await result.json()
+            return {...filter, values: data }
         } catch( err) {
             console.log(err)
             return filter
