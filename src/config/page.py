@@ -1,11 +1,10 @@
 import json
 from typing import List
 
-import pandas as pd
 from pandas import DataFrame
+import pandas as pd
 
 from config.globals import DevelopmentConfig
-from config.report import ComputeMethod, GlobalConfig, ReportConfig, ConfigPack, SlideConfig
 
 data_config = DevelopmentConfig()
 
@@ -55,8 +54,10 @@ class ComputeMethod(object):
 
 
 class SlideConfig(object):
-    def __init__(self, name='', filters: List[ConfigPack] = [], group_by=ConfigPack('group_by'),
-                 computer_methods: List[ConfigPack] = [], img='', included=False):
+    def __init__(self, name='', filters=None, group_by=ConfigPack('group_by'),
+                 computer_methods=None, img='', included=False):
+        if computer_methods is None:
+            computer_methods = []
         if filters is None:
             filters = []
         self.name = name
@@ -86,8 +87,29 @@ def gen_config(df: DataFrame):
 
     slide1 = SlideConfig('page 1', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
                          'p1.png', True)
-    config_pack = ReportConfig(global_config, [slide1])
+    slide2 = SlideConfig('page 2', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p2.png', True)
+    slide3 = SlideConfig('page 3', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p3.png', True)
+    slide4 = SlideConfig('page 4', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p4.png', True)
+    slide5 = SlideConfig('page 5', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p5.png', True)
+    slide6 = SlideConfig('page 6', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p6.png', True)
+    slide7 = SlideConfig('page 7', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p7.png', True)
+    slide8 = SlideConfig('page 8', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p8.png', True)
+    slide9 = SlideConfig('page 9', [fuel_type], ConfigPack('Group By', ['Brand', 'Oem']),
+                         'p9.png', True)
+    config_pack = ReportConfig(global_config, [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9])
     return config_pack
+
+
+def json2obj(json_data):
+    configs = ReportConfig(**json.loads(json_data))
+    return configs
 
 
 if __name__ == '__main__':
