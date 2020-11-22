@@ -1,0 +1,10 @@
+name: AutomaticReport
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.5.6
+  - pandas
+  - flask
+  - python-pptx
+prefix: /usr/local/Caskroom/miniconda/base/envs/AutomaticReport
